@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 package Study180830;
-=======
-<<<<<<< HEAD
-package Study180830;
-=======
-package Study0830;
->>>>>>> branch 'master' of https://github.com/baekdata/algorithm_practice.git
->>>>>>> branch 'master' of https://github.com/baekdata/algorithm_practice.git
 import java.util.Scanner;
 
 public class BJ_14499_dice { // PASS, 시뮬레이션,  주사위 굴리기
