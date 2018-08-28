@@ -1,4 +1,4 @@
-package Study0830;
+package Study180830;
 import java.io.IOException;
 import java.util.Scanner;
 public class BJ_14500_tetromino { //PASS  DFS + 예외케이스 처리 / brute force가능. // dfs처리 시 백트래킹 처리 필수 

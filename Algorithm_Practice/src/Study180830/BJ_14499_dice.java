@@ -1,4 +1,4 @@
-package Study0830;
+package Study180830;
 import java.util.Scanner;
 
 public class BJ_14499_dice { // PASS, 시뮬레이션,  주사위 굴리기

@@ -1,4 +1,4 @@
-package Study0830;
+package Study180830;
 import java.util.Scanner;
 
 public class BJ_14500_tetromino2 { //  참고 소스 
