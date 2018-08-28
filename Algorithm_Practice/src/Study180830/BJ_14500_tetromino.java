@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 package Study180830;
+=======
+<<<<<<< HEAD
+package Study180830;
+=======
+package Study0830;
+>>>>>>> branch 'master' of https://github.com/baekdata/algorithm_practice.git
+>>>>>>> branch 'master' of https://github.com/baekdata/algorithm_practice.git
 import java.io.IOException;
 import java.util.Scanner;
 public class BJ_14500_tetromino { //PASS  DFS + 예외케이스 처리 / brute force가능. // dfs처리 시 백트래킹 처리 필수 
