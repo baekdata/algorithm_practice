@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 package Study180830;
-=======
-<<<<<<< HEAD
-package Study180830;
-=======
-package Study0830;
->>>>>>> branch 'master' of https://github.com/baekdata/algorithm_practice.git
->>>>>>> branch 'master' of https://github.com/baekdata/algorithm_practice.git
 import java.util.Scanner;
 
 public class BJ_14500_tetromino2 { //  참고 소스 
