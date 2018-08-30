@@ -4,9 +4,7 @@ import java.util.Scanner;
 public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성기출문제 
 	//TODO n, m, k값을 잘 비교해서 인지해서 다시 풀어보기.
 	// 로직은 사다리 잇고, dfs로 1,2,3개 가능한 만큼 계속 dfs돌려서 맞을때까지 진행.
-	
-	//52%에서 틀림 //
-	
+	//PASS
 	static int[][] map;
 	static int n, m, k;
 	static int[] result;
@@ -30,16 +28,14 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 			map[temp][temp2] = 1;
 			map[temp][temp2+1] = 2;
 		}
+		sc.close();
 
 		checkLadder(); //사다리 체크.
 		checkResult(); //결과값 출력 여부 체크. 
 		
 		if(isPass) {
-			//TODO 최소 사다리 조작 갯수 출력
 			System.out.println(0);
 		}else {
-//			System.out.println("사다리 조작 다시");
-			
 			for(int s=1; s<=3; s++) {
 				dfs(1, 0, s); // depth 0, 사다리 1~3개로 체크 가능.
 				if(isPass) {
@@ -50,7 +46,6 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 			if(!isPass) {
 				System.out.println("-1");
 			}
-//			checkLadder();
 		}
 	}
 	
@@ -59,7 +54,7 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 			int x = j;
 			for(int i=1; i<=k; i++) { // 가로줄 진행. 
 				if(map[i][x] == 1) { // 사다리 오른쪽 
-					if(x+1 <= k) {
+					if(x+1 <= n) { //TODO 이부분때문에 틀렸던 것. n이 아니라 k로 하고 있었음. 
 						x = x+1;
 					}
 				}else if(map[i][x] == 2) { // 사다리 왼쪽 
@@ -67,11 +62,8 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 						x = x-1;
 					}
 				}
-
-				if(i == (k)) { // 값 대입 
-					result[j] = x;
-				}
 			}
+			result[j] = x;
 		}
 	}
 	
@@ -88,8 +80,7 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 	
 	public static void dfs(int row, int depth, int index) {
 		if(index == depth) {
-			checkLadder();
-			checkResult();
+			checkLadder(); checkResult();
 			
 			if(isPass) {
 				System.out.println(index+"");
@@ -97,22 +88,22 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 			return;
 		}
 		
-		for(int s=row; s<=k; s++) {
-			for(int t=1; t<n; t++) {
-				if(map[s][t]==0) {
-					if(t-1 < 0 || t+1 > n) continue;
-					if(map[s][t-1] == 1) continue;
-					if(map[s][t+1] == 1) continue;
+		for(int s=1; s<=n; s++) {
+			for(int t=row; t<k+1; t++) {
+					// 아닌 케이스들 다 제거 
+					if(map[t][s] == 1 || map[t][s] == 2) continue;
+					if(s-1 < 0 || s+1 > n) continue;
+					if(map[t][s-1] == 1) continue;
+					if(map[t][s+1] == 1) continue;
 					
-					map[s][t] = 1;
-					map[s][t+1] = 2;
+					map[t][s] = 1;
+					map[t][s+1] = 2;
 					
-					dfs(s, depth+1, index); 
+					dfs(t, depth+1, index); 
 					if(isPass) return;
 					
-					map[s][t] = 0; // 백트래킹 
-					map[s][t+1] = 0;
-				}
+					map[t][s] = 0; // 백트래킹 
+					map[t][s+1] = 0;
 			}
 		}
 	}
