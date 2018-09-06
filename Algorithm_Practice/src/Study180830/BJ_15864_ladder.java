@@ -5,6 +5,8 @@ public class BJ_15864_ladder { //false // 사다리조작, brute force // 삼성
 	//TODO n, m, k값을 잘 비교해서 인지해서 다시 풀어보기.
 	// 로직은 사다리 잇고, dfs로 1,2,3개 가능한 만큼 계속 dfs돌려서 맞을때까지 진행.
 	//PASS
+	
+	//TODO >> 좌표는 이중포문 말고 좌표로 클래스에 넣어서 한번에 1중포문으로 해보기 
 	static int[][] map;
 	static int n, m, k;
 	static int[] result;
