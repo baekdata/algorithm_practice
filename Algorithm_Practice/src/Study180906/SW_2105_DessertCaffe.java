@@ -49,6 +49,7 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 			for(int j=0; j<num; j++) {
 				for(int k=0; k<num; k++) {
 					if((j-1>=0) && (j+1 <num) && (k+2<num) && (k>=0)){	
+						System.out.println(j+" "+k);
 						arrayList.add(new DessertClass(j, k, 1)); // 가능성 있는 출발점 넣기 
 					}
 				}
@@ -63,6 +64,9 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 				startY = y;
 				sortCheck.clear();
 				successdPass = false;
+				if(startX == 3 && startY == 0) {
+					System.out.println("ssss");
+				}
 
 				for(int j=0; j<num; j++) {
 					for(int k=0; k<num; k++) {
@@ -71,11 +75,14 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 				}		
 
 				if((x+1)<num && (y+1) < num && (map[x][y] != map[x+1][y+1])) {
+					if(startX == 3 && startY == 0) {
+						System.out.println("inner");
+					}
 					dfs(x, y, go);
 				}
 			}
 
-			if(isPass) { // max값 찾았을 경우 
+			if(max > 0) { // max값 찾았을 경우 
 				System.out.println("#"+(i+1)+" "+max);
 			}else {
 				System.out.println("#"+(i+1)+" -1");
@@ -118,6 +125,7 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 		}
 
 		if((nx == startX) && (ny == startY)) {
+			System.out.println(nx+" "+ny+" "+"s"+" "+sortCheck.size());
 			isPass = true; // 회귀 했을 경우
 
 			if(max<sortCheck.size()) {
@@ -126,26 +134,20 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 			return; // 끝났으므로 탈출 
 		}
 		
-		if(go == 4) {
-			return;
-		}
-
-		//TODO go랑 go+1이 1개 차이어야 함. 
-
 		if(nx >= 0 && ny >= 0 && nx < num && ny < num) { // 벽 넘어가면 탈출 
 			if(!check[nx][ny]) { // 방문 안했어야 함. 
 				if(!sortCheck.contains(map[nx][ny])) { // 종류 체크 필요 // 기존에 없던 종류일 경우
-					dfs(nx, ny, go); // 기존 방향 그대로 
 					successdPass = false;
+					dfs(nx, ny, go); // 기존 방향 그대로 
+					sortCheck.remove(sortCheck.size()-1);
 				}else {
 					if(successdPass) {
 						isPass = false;
 						return;
 					}else {
 						check[x][y] = false;
-						sortCheck.remove(sortCheck.size()-1);
-						dfs(x, y, go+1); // 조건 넘어갈 경우 기존 좌표, 다른방향 해보기 
 						successdPass = true;
+						dfs(x, y, go+1); // 조건 넘어갈 경우 기존 좌표, 다른방향 해보기 
 					}
 				}
 			}else {
@@ -154,9 +156,8 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 					return;
 				}else {
 					check[x][y] = false;
-					sortCheck.remove(sortCheck.size()-1);
-					dfs(x, y, go+1); // 조건 넘어갈 경우 기존 좌표, 다른방향 해보기 
 					successdPass = true;
+					dfs(x, y, go+1); // 조건 넘어갈 경우 기존 좌표, 다른방향 해보기 
 				}
 			}
 		}else {
