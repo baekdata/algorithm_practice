@@ -41,7 +41,7 @@ public class BJ_1012_Vegitable { // 전형적인 bfs 문제  // PASS
 			}
 			System.out.println(groupCount);
 		}
-		
+		sc.close(); 
 	}
 	
 	public static void bfs(int x, int y) {
@@ -58,7 +58,7 @@ public class BJ_1012_Vegitable { // 전형적인 bfs 문제  // PASS
 				int nx = xx + dx[s];
 				int ny = yy + dy[s];
 				
-				if(nx>=0 && ny>=0 && nx<n && ny <m) {
+				if(nx>=0 && ny>=0 && nx<n && ny <m) { // 벽체크 
 					if(!check[nx][ny] && (map[nx][ny] == 1)) {
 						check[nx][ny] = true;
 						q.add(new VegPoint(nx, ny));
@@ -69,7 +69,7 @@ public class BJ_1012_Vegitable { // 전형적인 bfs 문제  // PASS
 	}
 }
 
-class VegPoint{
+class VegPoint{ // 좌표 클래스 
 	int x, y;
 	
 	public VegPoint(int x, int y) {
