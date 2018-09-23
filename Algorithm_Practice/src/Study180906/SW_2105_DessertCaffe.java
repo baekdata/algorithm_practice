@@ -13,7 +13,6 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 	static ArrayList<Integer> sortCheck = new ArrayList<>();
 
 	static boolean successdPass; // 연속 체크 
-
 	static int startX, startY;
 
 	public static void main(String[] args) {
@@ -49,7 +48,6 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 			for(int j=0; j<num; j++) {
 				for(int k=0; k<num; k++) {
 					if((j-1>=0) && (j+1 <num) && (k+2<num) && (k>=0)){	
-						System.out.println(j+" "+k);
 						arrayList.add(new DessertClass(j, k, 1)); // 가능성 있는 출발점 넣기 
 					}
 				}
@@ -64,9 +62,6 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 				startY = y;
 				sortCheck.clear();
 				successdPass = false;
-				if(startX == 3 && startY == 0) {
-					System.out.println("ssss");
-				}
 
 				for(int j=0; j<num; j++) {
 					for(int k=0; k<num; k++) {
@@ -75,9 +70,6 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 				}		
 
 				if((x+1)<num && (y+1) < num && (map[x][y] != map[x+1][y+1])) {
-					if(startX == 3 && startY == 0) {
-						System.out.println("inner");
-					}
 					dfs(x, y, go);
 				}
 			}
@@ -125,9 +117,7 @@ public class SW_2105_DessertCaffe { // 삼성 기출 // 스터디 1시간 반
 		}
 
 		if((nx == startX) && (ny == startY)) {
-			System.out.println(nx+" "+ny+" "+"s"+" "+sortCheck.size());
 			isPass = true; // 회귀 했을 경우
-
 			if(max<sortCheck.size()) {
 				max = sortCheck.size();
 			}
