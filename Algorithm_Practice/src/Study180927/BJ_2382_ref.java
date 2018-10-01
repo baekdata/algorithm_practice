@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  */
 
-public class BJ_2382_ref { // sw 모의고사 미생물 격리 참고 답안 
+public class BJ_2382_ref { // sw 모의고사 미생물 격리 참고 답안  // 이렇게 동시에 처리해야하는 것들은 2중배열로 값 여러개둬서 해도 괜찮.
 	static int[][] map;
 	static int time, num, mapSize;
 	static int[][] group;
@@ -26,27 +26,26 @@ public class BJ_2382_ref { // sw 모의고사 미생물 격리 참고 답안
 			mapSize = sc.nextInt();
 			time = sc.nextInt();
 			num = sc.nextInt();
-			
 			group = new int[num][5];
 			for(int j=0; j<num; j++) { // 클래스 만들지 말고 배열로 받았음 
-				group[j][0] = 1;
-				group[j][1] = sc.nextInt();
-				group[j][2] = sc.nextInt();
-				group[j][3] = sc.nextInt();
-				group[j][4] = sc.nextInt();
+				group[j][0] = 1; // 살았으면 1 죽었으면 0
+				group[j][1] = sc.nextInt(); //x
+				group[j][2] = sc.nextInt(); //y
+				group[j][3] = sc.nextInt(); //미생물 
+				group[j][4] = sc.nextInt(); //방향 
 			}
+			//////입력부//////
 			
-			for(int j=0; j<time; j++) { // 시간만큼 이동 
-				move();
-			}
+			// 시간만큼 이동
+			for(int j=0; j<time; j++) move();
 			
+			//미생물 총합 계산 
 			int result = 0;
 			for(int j=0; j<num; j++) {
-				if(group[j][0] == 1) {
-					result+= group[j][3];
+				if(group[j][0] == 1) { // 살아있는 군집만 
+					result+= group[j][3]; // 그 군집의 미생물 수 합치기 
 				}
 			}
-			
 			System.out.println("#"+i+" "+result);
 		}
 		sc.close();
@@ -57,47 +56,48 @@ public class BJ_2382_ref { // sw 모의고사 미생물 격리 참고 답안
 		
 		for(int i=0; i<num ; i++) {
 			if(group[i][0] == 1) {
+				// 좌표 및 방향 세팅 
 				int nowY = group[i][1];
 				int nowX = group[i][2];
 				int nowDirection = group[i][4];
 				
 				switch(nowDirection) {
-				//상
-				case 1:
+				case 1: //상
 					nowY-=1;
-					if(nowY==0) {
+					if(nowY==0) { // 약품 만남 
 						group[i][3]/=2;
 						group[i][4]=2;
 					}
 					break;
 					
-				case 2:
+				case 2: //하 
 					nowY+=1;
-					if(nowY== mapSize-1) {
+					if(nowY== mapSize-1) { // 약품 만남 
 						group[i][3] /=2;
 						group[i][4] =1;
 					}
 					break;
 					
-				case 3:
+				 	
+				case 3: //좌 
 					nowX-=1;
-					if(nowX==0) {
+					if(nowX==0) { // 약품 만남 
 						group[i][3]/=2;
 						group[i][4]=4;
 					}
 					break;
-					
-				case 4:
+			
+				case 4: //우 
 					nowX+=1;
-					if(nowX == mapSize-1) {
+					if(nowX == mapSize-1) { // 약품 만남 
 						group[i][3]/=2;
 						group[i][4]=3;
 					}
 					break;
 				}
 				
-				map[nowY][nowX] += 1;
-				group[i][1] = nowY;
+				map[nowY][nowX] += 1; // 해당 맵 값 증가 
+				group[i][1] = nowY;   // 해당 군집 좌표 대입 
 				group[i][2] = nowX;
 			}
 		}
@@ -105,15 +105,14 @@ public class BJ_2382_ref { // sw 모의고사 미생물 격리 참고 답안
 		for(int i=0; i<mapSize; i++) {
 			for(int j=0; j<mapSize; j++) {
 				int value = map[i][j];
-				if(value >1) {
-					int[]values= new int[value];
-					
-					int now =0;
+				if(value >1) { // 값이 1이상이므로 합쳐진다. 
+					int[] values = new int[value];
+					int now = 0;
 					int max = -1;
 					
 					for(int k=0; k<num; k++) {
 						if(group[k][0] == 1 && group[k][1] == i && group[k][2] == j) {
-							values[now] =k;
+							values[now] = k;
 							now += 1;
 							if(max == -1) {
 								max = k;
@@ -123,27 +122,16 @@ public class BJ_2382_ref { // sw 모의고사 미생물 격리 참고 답안
 						}
 					}
 					
+					// 하나로 합치는 과정 
 					for(int k=0; k<value; k++) {
 						int nowValue = values[k];
 						if(nowValue != max && group[nowValue][0] == 1) {
-							group[nowValue][0] = 0;
-							group[max][3] += group[nowValue][3];
+							group[nowValue][0] = 0; // 죽었다고 선언하기 
+							group[max][3] += group[nowValue][3]; // 군집 합치기 
 						}
 					}
 				}
 			}
 		}
-	}
-	
-	static void showVaues() {
-		for(int i=0; i<num; i++) {
-			System.out.println((i+1)+":");
-			
-			for(int j=0; j<5; j++) {
-				System.out.print(group[i][j]+ "");
-			}
-			System.out.println();
-		}
-		System.out.println();
 	}
 }
