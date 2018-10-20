@@ -1,6 +1,5 @@
 package Study181011;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BJ_permutation {
@@ -9,7 +8,6 @@ public class BJ_permutation {
         while (i > 0 && a[i-1] >= a[i]) {
             i -= 1;
         }
-
         // 마지막 순열
         if (i <= 0) {
             return false;
@@ -34,13 +32,7 @@ public class BJ_permutation {
         }
         return true;
     }
-    public static int calculate(int a[]) {
-        int sum = 0;
-        for (int i=1; i<a.length; i++) {
-            sum += Math.abs(a[i] - a[i-1]);
-        }
-        return sum;
-    }
+    
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -48,11 +40,12 @@ public class BJ_permutation {
         for (int i=0; i<n; i++) {
             a[i] = sc.nextInt();
         }
-        Arrays.sort(a);
         int ans = 0;
         do {
-            int temp = calculate(a);
-            ans = Math.max(ans, temp);
+        	for(int i=0; i<n; i++) {
+        		System.out.print(a[i]);
+        	}
+        	System.out.println();
         } while(next_permutation(a));
 
         System.out.println(ans);

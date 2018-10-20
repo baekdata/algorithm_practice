@@ -50,15 +50,17 @@ public class BJ_15686_shChicken{
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < N; j++) {
 				val = Integer.parseInt(st.nextToken());
-				if (val == 1) {
+				if (val == 1) {  // 집 
 					homeList.add(new Node(i, j));
 					map[i * N + j] = 1;
 				}
-				if (val == 2) {
+				if (val == 2) { // 치킨 집 
 					chickenList.add(new Node(i, j));
 				}
 			}
 		}
+		//// 입력 완료 //// 
+		
 		chickenPickDfs(0, 0);
 		System.out.println(min);
 	}
