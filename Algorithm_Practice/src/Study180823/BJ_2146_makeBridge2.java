@@ -39,6 +39,13 @@ public class BJ_2146_makeBridge2 { // 다리 만들기 // BFS + DFS
             }
          }
       }
+      
+      for(int i=0; i<num ;i++) {
+    	  for(int j=0; j<num; j++) {
+    		  System.out.print(arr[i][j]);
+    	  }
+    	  System.out.println();
+      }
 
       for (int i = 0; i < num; i++) { //섬에 모든 지점에서 시작, 가장 빠른 지점 체크. 최단거리
          for (int j = 0; j < num; j++) {
@@ -52,7 +59,7 @@ public class BJ_2146_makeBridge2 { // 다리 만들기 // BFS + DFS
       System.out.println(result); // 결과값 출력
    }
 
-   public static void dfs(int x, int y) { // 각 섬 체크.
+   public static void dfs(int x, int y) { // 각 섬 체크. dfs는 중복제거 및 가지치기 중요 
       for (int i = 0; i < 4; i++) {
          int nextX = x + dx[i];
          int nextY = y + dy[i];

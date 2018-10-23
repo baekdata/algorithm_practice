@@ -1,11 +1,9 @@
 package samsungProb;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class BJ_15686_chickendel { // 1015 월요일 : 삼성기출 - 치킨배달   >>> 솔직히 30분 컷 문제 (1회독 pass) 
-	
 	static class Pair{
 		int x, y;
 		public Pair(int x, int y) {
